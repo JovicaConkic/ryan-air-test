@@ -1,0 +1,26 @@
+.header {
+    .navbar {
+        position: fixed;
+        width: 100%;
+        z-index: 100;
+        .navbar-brand {
+            margin: 1.5px 0 2.5px 15px;
+        }
+        .navbar-header {
+            width: 100%;
+            .material-design-hamburger {
+                right: 0;
+                @media screen and (max-width: $mobile) {
+                    left: calc(100% - 50px);
+                }
+            }
+        }
+        .material-design-hamburger {
+            &:hover {
+                .material-design-hamburger__layer {
+                    background: $whitesmoke;
+                }
+            }
+        }
+    }
+}

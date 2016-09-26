@@ -1,0 +1,59 @@
+<!doctype html>
+<html ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <title>Ryanair Project</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="fragment" content="!" />
+    <base href="/">
+
+    <!-- bower:css -->
+    <link rel="stylesheet" href="assets/bower_components/angular-loading-bar/build/loading-bar.min.css">
+    <link rel="stylesheet" href="assets/bower_components/bootstrap-css-only/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.min.css">
+    <!-- endbower -->
+    <!-- injector:css -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- endinjector -->
+</head>
+<body>
+    <div class="main">
+        <div data-ng-include="'/assets/app/views/shell.html'"></div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <span class="text-center text-info credit">© Copyright 2016 Ryanair Project<br/>build Version <span ng-bind="version"></span></span>
+        </div>
+    </div>
+
+     <!-- bower:js -->
+     <script src="assets/bower_components/angular/angular.min.js"></script>
+     <script src="assets/bower_components/angular-animate/angular-animate.min.js"></script>
+     <script src="assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+     <script src="assets/bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+     <script src="assets/bower_components/angular-route/angular-route.min.js"></script>
+     <script src="assets/bower_components/ngstorage/ngStorage.min.js"></script>
+     <script src="assets/bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.min.js"></script>
+     <script src="assets/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+     <script src="assets/bower_components/lodash/lodash.js"></script>
+     <script src="assets/bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
+     <!-- endbower -->
+
+    <!-- injector:js -->
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/app/controllers/flight-finder.controller.js"></script>
+    <script src="assets/app/controllers/route-maps.controller.js"></script>
+    <script src="assets/app/controllers/shell.controller.js"></script>
+    <script src="assets/app/directives/compare-to.directive.js"></script>
+    <script src="assets/app/directives/document-click.directive.js"></script>
+    <script src="assets/app/factories/airport.factory.js"></script>
+    <script src="assets/app/factories/auth-interceptor.factory.js"></script>
+    <script src="assets/app/services/airport.service.js"></script>
+    <!-- endinjector -->
+</body>
+
+</html>

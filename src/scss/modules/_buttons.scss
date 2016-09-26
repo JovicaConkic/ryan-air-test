@@ -1,0 +1,6 @@
+.btn-inline {
+    margin-top: 25px;
+    @media screen and (max-width: $mobile) {
+        margin-top: 0;
+    }
+}

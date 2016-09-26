@@ -1,0 +1,27 @@
+<div class="route-maps">
+    <h1>Route maps</h1>
+    <div class="map_canvas">
+        <form name="searchForm" class="map-search-form" role="form" method="POST" ng-submit="vm.searchAirports(vm.selected)" novalidate>
+            <div ng-class="searchForm.search.$dirty && searchForm.search.$invalid || vm.error ? ' has-error' : ''">
+                <div class="input-group">
+                    <input type="text" name="search" ng-model="vm.selected" uib-typeahead="city.coords.city for city in vm.markers | filter:$viewValue | limitTo:8" class="form-control" placeholder="Search by City" autocomplete="off" required>
+                    <span class="input-group-btn">
+                        <button ng-show="vm.showSearch" class="btn" ng-class="searchForm.search.$dirty && searchForm.search.$invalid || vm.error ? ' btn-danger' : ' btn-primary'" type="submit" ng-disabled="searchForm.search.$invalid">Search</button>
+                        <button ng-hide="vm.showSearch" class="btn btn-info" type="button" ng-click="vm.resetSearch(searchForm)">Reset</button>
+                    </span>
+                </div>
+                <span class="help-block" ng-show="searchForm.search.$dirty && searchForm.search.$invalid || vm.error">
+                    <strong ng-show="searchForm.search.$error.required">City is required.</strong>
+                    <strong ng-show="vm.error" ng-bind="vm.error"></strong>
+                </span>
+            </div>
+        </form>
+        <ui-gmap-google-map center="vm.map.center" zoom="vm.map.zoom" draggable="true" options="vm.map.options">       
+            <ui-gmap-marker ng-repeat="m in vm.markers" options="m.options" coords="m.coords" click="vm.onClick" idkey="m.id">
+                <ui-gmap-window show="m.show" options="vm.windowOptions" coords="m.coords">
+                    <div style="color: black;">{{'Airport ' + m.coords.city + ', ' + m.coords.country}}</div>
+                </ui-gmap-window>
+            </ui-gmap-marker>
+        </ui-gmap-google-map>
+    </div>
+</div>

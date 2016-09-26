@@ -1,0 +1,30 @@
+.sidebar {
+    width: 0;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    top: 55px;
+    bottom: 0;
+    @include vendor('transition', all 0.2s ease-in-out);
+    @include vendor('box-shadow', 0 8px 17px rgba(0,0,0,.2));
+    background: $sidbarGray;
+    z-index: 10;
+    &.open {
+        width: 300px;
+    }
+    .nav {
+        margin-top: 20px;
+        li.active {
+            a {
+                background: $whitesmoke;
+                color: $darkGray;
+            }
+        }
+        a {
+            color: $navLink;
+            &:hover {
+               color: $darkGray; 
+            }
+        }
+    }
+}

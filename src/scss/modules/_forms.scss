@@ -1,0 +1,14 @@
+.map-search-form {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    float: right;
+    z-index: 9;
+    max-width: 300px;
+    @media screen and (max-width: $mobile) {
+        max-width: 260px;
+    }
+    @media screen and (max-width: $mobile-middle) {
+        margin-top: 40px;
+    }
+}

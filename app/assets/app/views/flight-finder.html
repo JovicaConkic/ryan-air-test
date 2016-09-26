@@ -1,0 +1,105 @@
+<div class="cheap-flights">
+    <h1>Cheap flight finder</h1>
+    <form name="flightsForm" role="form" method="POST" ng-submit="vm.searchFlights(vm.flight)" novalidate>
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-2">
+                <div class="form-group" ng-class="(flightsForm.from.$dirty && flightsForm.from.$invalid) || (flightsForm.fromCode.$dirty && flightsForm.fromCode.$invalid) || vm.error.from ? ' has-error' : ''">
+                    <label for="from">From:</label>
+                    <input type="text" ng-model="vm.flight.from" typeahead-on-select='vm.onFromSelect($item)' name="from" uib-typeahead="city.coords.city for city in vm.airports | filter:$viewValue | limitTo:8" class="form-control" id="from" autocomplete="off" compare-to="vm.flight.to" required>
+                    <input type="hidden" ng-model="vm.flight.fromCode" name="fromCode"  class="form-control" required>
+                    <span class="help-block" ng-show="flightsForm.from.$dirty && flightsForm.from.$invalid || vm.error.from">
+                        <strong ng-show="flightsForm.from.$error.required">Airport from is required.</strong>
+                        <strong ng-show="flightsForm.from.$error.compareTo">Airport from and destination airport can't be the same.</strong>
+                        <strong ng-show="vm.error.from" ng-bind="vm.error.from"></strong>
+                    </span>
+                    <span class="help-block" ng-show="flightsForm.fromCode.$dirty && flightsForm.fromCode.$invalid">
+                        <strong ng-show="flightsForm.fromCode.$error.required">Airport from not found.</strong>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+                <div class="form-group" ng-class="(flightsForm.to.$dirty && flightsForm.to.$invalid) || (flightsForm.toCode.$dirty && flightsForm.toCode.$invalid) || vm.error.to ? ' has-error' : ''">
+                    <label for="to">To:</label>
+                    <input type="text" ng-model="vm.flight.to" typeahead-on-select='vm.onToSelect($item)' ng-value="city.iataCode" name="to" uib-typeahead="city.coords.city for city in vm.airports | filter:$viewValue | limitTo:8" class="form-control" id="to" autocomplete="off" required>
+                    <input type="hidden" ng-model="vm.flight.toCode" name="toCode"  class="form-control" required>
+                    <span class="help-block" ng-show="flightsForm.to.$dirty && flightsForm.to.$invalid || vm.error.to">
+                        <strong ng-show="flightsForm.to.$error.required">Destination airport is required.</strong>
+                        <strong ng-show="vm.error.to" ng-bind="vm.error.to"></strong>
+                    </span>
+                    <span class="help-block" ng-show="flightsForm.toCode.$dirty && flightsForm.toCode.$invalid">
+                        <strong ng-show="flightsForm.toCode.$error.required">Destination airport not found.</strong>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+                <div class="form-group" ng-class="flightsForm.date_from.$dirty && flightsForm.date_from.$invalid ? ' has-error' : ''">
+                    <label for="date_from">Date from:</label>
+                    <p class="input-group">
+                        <input type="text" ng-model="vm.flight.dateFrom" class="form-control" name="date_from" id="date_from" uib-datepicker-popup is-open="vm.popup1.opened" show-button-bar="false" datepicker-options="vm.dateOptions" ng-required="true" ng-click="vm.open1()" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="vm.open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <span class="help-block" ng-show="flightsForm.date_from.$dirty && flightsForm.date_from.$invalid">
+                        <strong ng-show="flightsForm.date_from.$error.required">Date from is required.</strong>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+                <div class="form-group" ng-class="flightsForm.date_to.$dirty && flightsForm.date_to.$invalid ? ' has-error' : ''">
+                    <label for="date_to">Date to:</label>
+                    <p class="input-group">
+                        <input type="text" ng-model="vm.flight.dateTo"class="form-control" name="date_to" id="date_to" uib-datepicker-popup is-open="vm.popup2.opened" show-button-bar="false" datepicker-options="vm.dateOptions" ng-required="true" ng-click="vm.open2()" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="vm.open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <span class="help-block" ng-show="flightsForm.date_to.$dirty && flightsForm.date_to.$invalid">
+                        <strong ng-show="flightsForm.date_to.$error.required">Date to is required.</strong>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+                <div class="form-group" ng-class="flightsForm.price.$dirty && flightsForm.price.$invalid ? ' has-error' : ''">
+                    <label for="price">Max. price:</label>
+                    <input type="number" ng-model="vm.flight.price" class="form-control" name="price" id="price" min="1" required>
+                    <span class="help-block" ng-show="flightsForm.price.$dirty && flightsForm.price.$invalid">
+                        <strong ng-show="flightsForm.price.$error.required">Price is required.</strong>
+                        <strong ng-show="flightsForm.price.$error.min">Can't be less than 1.</strong>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+                <button type="submit" class="btn btn-primary btn-inline" ng-disabled="flightsForm.$invalid">Search</button>
+            </div>
+        </div>
+    </form>
+    <div ng-if="vm.showResults">
+        <h3>Search results:</h3>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Date From</th>
+                        <th>Date To</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="flight in vm.cheapFlights| orderBy:'price'">
+                        <td ng-bind="flight.from"></td>
+                        <td ng-bind="flight.to"></td>
+                        <td ng-bind="flight.dateFrom | date:'yyyy-MM-dd HH:mm:ss Z'"></td>
+                        <td ng-bind="flight.dateTo | date:'yyyy-MM-dd HH:mm:ss Z'"></td>
+                        <td>{{flight.price| currency: flight.currency :2}}</td>
+                    </tr>
+                    <tr ng-show="vm.cheapFlights.length === 0">
+                        <td colspan="5">There is no matching data</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

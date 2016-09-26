@@ -1,0 +1,27 @@
+<div document-click="vm.toggleSidebar($event)" ng-controller="shellCtrl as vm">
+    <div id="wrapper">
+        <div class="header">
+            <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">
+                            Ryanair Project
+                        </a>
+                        <hamburger-toggle state="vm.tgState" class="hamburger-toggle"></hamburger-toggle>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="sidebar" class="sidebar" ng-class="{open: vm.tgState}">
+            <ul class="nav nav-pills nav-stacked">
+                <li ng-class="{active: vm.$route.current.activetab == 'flight-finder'}"><a href="/flight-finder"><span class="glyphicon glyphicon-plane"></span>&nbsp;&nbsp;Cheap Flights</a></li>
+                <li ng-class="{active: vm.$route.current.activetab == 'route-maps'}"><a href="/route-maps"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;Route Maps</a></li>              
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div ng-view class="view-wrapper container"></div>
+    </div>
+</div>
+
